@@ -1,8 +1,13 @@
+// d:/vue-clickhr-main/tsconfig.json (Your existing file, consider these comments)
 {
-  "files": ["env.d.ts"],
+  "files": ["env.d.ts"], // This is fine if env.d.ts contains global type declarations for the whole project.
+                         // Alternatively, ensure env.d.ts is included within tsconfig.app.json.
   "references": [
     { "path": "./tsconfig.app.json" },
     { "path": "./tsconfig.node.json" }
-  ],
-  "include": ["src", "env.d.ts"]
+  ]
+  // "include" at this root level is often not needed when using project references,
+  // as the referenced projects define their own includes.
+  // If you remove "include" from here, ensure "env.d.ts" is properly included
+  // in tsconfig.app.json if it's specific to the app, or keep it in "files" if truly global.
 }

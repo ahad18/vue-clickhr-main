@@ -1,15 +1,32 @@
+// In d:/vue-clickhr-main/tsconfig.app.json
 {
-  "extends": "@vue/tsconfig/tsconfig.dom.json",
+  // "extends": "./tsconfig.json", // Optional: if it extends the root one for some base options
   "compilerOptions": {
-    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
+    "composite": true,        // Solution for: "must have setting 'composite': true"
+    "declaration": true,      // Recommended with composite, helps define the "output"
+    "emitDeclarationOnly": true, // Solution for: "may not disable emit" by emitting only .d.ts files
+                                // This tells TSC to generate declaration files (.d.ts) but not .js files,
+                                // leaving .js bundling to Vite/Vue CLI.
+    // Ensure 'noEmit' is NOT true here.
+    // Remove 'noEmit: true' if it exists.
 
-    /* Linting */
-    "strict": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "erasableSyntaxOnly": true,
-    "noFallthroughCasesInSwitch": true,
-    "noUncheckedSideEffectImports": true
+    // ... your other existing compilerOptions like:
+    // "baseUrl": ".",
+    // "paths": { "@/*": ["src/*"] },
+    // "jsx": "preserve",
+    // "lib": ["ESNext", "DOM", "DOM.Iterable"],
+    // "module": "ESNext",
+    // "moduleResolution": "bundler", // or "node"
+    // "resolveJsonModule": true,
+    // "isolatedModules": true,
+    // "strict": true,
+    // "skipLibCheck": true
   },
-  "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.d.ts", "src/**/*.vue"]
+  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue", "../env.d.ts"], // Adjust path to env.d.ts if it's in root
+  "exclude": [
+    // "node_modules", // Usually handled by default
+    // "dist",
+    // ... any test files if not handled by a separate tsconfig.spec.json
+  ]
+  // ... any other specific settings for your app
 }

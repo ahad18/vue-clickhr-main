@@ -1,25 +1,27 @@
+// In d:/vue-clickhr-main/tsconfig.node.json
 {
+  // "extends": "./tsconfig.json", // Optional
   "compilerOptions": {
-    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.node.tsbuildinfo",
-    "target": "ES2022",
-    "lib": ["ES2023"],
-    "module": "ESNext",
-    "skipLibCheck": true,
+    "composite": true,     // Solution for: "must have setting 'composite': true"
+    // "noEmit": false,    // Solution for: "may not disable emit"
+                            //  OR remove 'noEmit: true' if it exists.
+                            //  For .ts files like vite.config.ts, it's often fine for TSC to emit .js
+                            //  or you can also use "emitDeclarationOnly": true if no .js output is desired from tsc itself.
 
-    /* Bundler mode */
-    "moduleResolution": "bundler",
-    "allowImportingTsExtensions": true,
-    "verbatimModuleSyntax": true,
-    "moduleDetection": "force",
-    "noEmit": true,
-
-    /* Linting */
-    "strict": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "erasableSyntaxOnly": true,
-    "noFallthroughCasesInSwitch": true,
-    "noUncheckedSideEffectImports": true
+    // ... your other existing compilerOptions like:
+    // "module": "ESNext",
+    // "moduleResolution": "bundler", // or "node", "NodeNext"
+    // "strict": true,
+    // "allowSyntheticDefaultImports": true, // Common for vite.config.ts tooling
+    // "skipLibCheck": true
   },
-  "include": ["vite.config.ts"]
+  "include": [
+    "vite.config.ts",
+    // ... any other .ts files that are part of your build process or run in Node
+    // e.g., "scripts/**/*.ts"
+  ],
+  "exclude": [
+    // "node_modules"
+  ]
+  // ... any other specific settings for your Node environment tooling
 }
